@@ -1,0 +1,189 @@
+{
+    "report_metadata": {
+        "title": "FER-2013 Error Analysis & Optimization Assessment",
+        "brand": "Powered by Saniya",
+        "evaluated_samples": 7178,
+        "baseline_accuracy": "45.24%"
+    },
+    "class_performance_summary": {
+        "best_f1_classes": [
+            {
+                "class": "surprise",
+                "f1_score": 0.660671
+            },
+            {
+                "class": "happy",
+                "f1_score": 0.584548
+            }
+        ],
+        "worst_f1_classes": [
+            {
+                "class": "disgust",
+                "f1_score": 0.269231
+            },
+            {
+                "class": "fear",
+                "f1_score": 0.060055
+            }
+        ],
+        "highest_recall_class": {
+            "class": "happy",
+            "recall": 0.904171,
+            "support": 1774
+        },
+        "lowest_recall_class": {
+            "class": "fear",
+            "recall": 0.032227,
+            "support": 1024
+        },
+        "highest_precision_class": {
+            "class": "surprise",
+            "precision": 0.658303
+        },
+        "lowest_precision_class": {
+            "class": "disgust",
+            "precision": 0.28866
+        }
+    },
+    "happy_bias_diagnostic": {
+        "total_test_samples": 7178,
+        "actual_happy_count": 1774,
+        "actual_happy_percentage": 24.71,
+        "predicted_happy_count": 3714,
+        "predicted_happy_percentage": 51.74,
+        "happy_prediction_inflation_ratio": 2.094,
+        "misclassifications_into_happy": {
+            "angry": {
+                "count": 363,
+                "percentage_of_actual": 37.89
+            },
+            "disgust": {
+                "count": 49,
+                "percentage_of_actual": 44.14
+            },
+            "fear": {
+                "count": 424,
+                "percentage_of_actual": 41.41
+            },
+            "neutral": {
+                "count": 602,
+                "percentage_of_actual": 48.82
+            },
+            "sad": {
+                "count": 517,
+                "percentage_of_actual": 41.46
+            },
+            "surprise": {
+                "count": 155,
+                "percentage_of_actual": 18.65
+            }
+        }
+    },
+    "top_confusion_pairs": [
+        {
+            "actual_class": "neutral",
+            "predicted_class": "happy",
+            "error_count": 602,
+            "percentage_of_actual": 48.82
+        },
+        {
+            "actual_class": "sad",
+            "predicted_class": "happy",
+            "error_count": 517,
+            "percentage_of_actual": 41.46
+        },
+        {
+            "actual_class": "fear",
+            "predicted_class": "happy",
+            "error_count": 424,
+            "percentage_of_actual": 41.41
+        },
+        {
+            "actual_class": "angry",
+            "predicted_class": "happy",
+            "error_count": 363,
+            "percentage_of_actual": 37.89
+        },
+        {
+            "actual_class": "fear",
+            "predicted_class": "sad",
+            "error_count": 213,
+            "percentage_of_actual": 20.8
+        },
+        {
+            "actual_class": "neutral",
+            "predicted_class": "sad",
+            "error_count": 184,
+            "percentage_of_actual": 14.92
+        },
+        {
+            "actual_class": "angry",
+            "predicted_class": "sad",
+            "error_count": 179,
+            "percentage_of_actual": 18.68
+        },
+        {
+            "actual_class": "fear",
+            "predicted_class": "surprise",
+            "error_count": 156,
+            "percentage_of_actual": 15.23
+        },
+        {
+            "actual_class": "surprise",
+            "predicted_class": "happy",
+            "error_count": 155,
+            "percentage_of_actual": 18.65
+        },
+        {
+            "actual_class": "sad",
+            "predicted_class": "angry",
+            "error_count": 128,
+            "percentage_of_actual": 10.26
+        }
+    ],
+    "imbalance_and_class_weights": {
+        "rationale": "Mitigates gradient dominance of majority classes (Happy, Sad, Neutral) over minority classes (Disgust, Fear).",
+        "formula": "w_j = total_samples / (num_classes * class_support)",
+        "recommended_class_weights": {
+            "angry": 1.0704,
+            "disgust": 9.2381,
+            "fear": 1.0014,
+            "happy": 0.578,
+            "neutral": 0.8317,
+            "sad": 0.8223,
+            "surprise": 1.234
+        }
+    },
+    "key_architectural_limitations": [
+        {
+            "issue": "Low Input Resolution (48x48 Grayscale)",
+            "impact": "Eliminates high-frequency micro-expression signals (subtle eye squints, minor lip tremors, skin furrows)."
+        },
+        {
+            "issue": "Class Imbalance in Ground Truth",
+            "impact": "Disgust has only 111 test samples (1.5%) vs Happy with 1,774 test samples (24.7%), skewing unweighted cross-entropy loss."
+        },
+        {
+            "issue": "Label Ambiguity & Morphological Overlap",
+            "impact": "Fear and Surprise share widened eyes and parted lips; Neutral, Sad, and Angry share relaxed mouths in static snapshots."
+        },
+        {
+            "issue": "Absence of Temporal Sequence Modeling",
+            "impact": "Static CNN treats frames in isolation without facial action unit temporal velocity."
+        }
+    ],
+    "optimization_recommendations": [
+        {
+            "technique": "Cost-Sensitive Training (Class Weighting)",
+            "expected_benefit": "Boosts Fear and Disgust recall from <26% without requiring additional dataset collection."
+        },
+        {
+            "technique": "Focal Loss (Lin et al.)",
+            "expected_benefit": "Dynamically scales loss, focusing gradient updates on hard misclassified examples rather than easy Happy samples."
+        },
+        {
+            "technique": "Data Augmentation for Minority Classes",
+            "expected_benefit": "Random horizontal flip, minor rotation (+/- 10 deg), and random brightness scaling to enlarge Disgust and Fear diversity."
+        }
+    ]
+}

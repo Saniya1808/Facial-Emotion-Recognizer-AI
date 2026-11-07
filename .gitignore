@@ -1,0 +1,123 @@
+# =============================================================================
+# .gitignore — Facial Emotion Recognizer AI
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Python & Virtual Environments
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/.venv/
+.venv/
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+
+# -----------------------------------------------------------------------------
+# Local SQLite Databases (Contains user history & audit logs)
+# -----------------------------------------------------------------------------
+*.db
+*.sqlite3
+*.sqlite
+emotion_recognizer.db
+
+# -----------------------------------------------------------------------------
+# Node.js & Frontend Build Outputs
+# -----------------------------------------------------------------------------
+frontend/node_modules/
+node_modules/
+frontend/dist/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.eslintcache
+*.local
+
+# -----------------------------------------------------------------------------
+# Environment Variables & Secrets
+# -----------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!*.env.example
+
+# -----------------------------------------------------------------------------
+# Temporary Uploads & Application Logs
+# -----------------------------------------------------------------------------
+uploads/
+temp/
+tmp/
+*.tmp
+*.log
+logs/
+
+# -----------------------------------------------------------------------------
+# Matplotlib, Visualization & Tool Caches
+# -----------------------------------------------------------------------------
+**/fontlist*.json
+.matplotlib/
+**/.matplotlib/
+
+# -----------------------------------------------------------------------------
+# IDEs & Operating System Artifacts
+# -----------------------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# Datasets & ML Artifact Tracking Rules
+# (Ignore raw dataset directories while explicitly tracking trained model artifacts)
+# -----------------------------------------------------------------------------
+ml/datasets/*
+!ml/datasets/.gitkeep
+
+# Exclude non-production model exports if present
+ml/artifacts/*.h5
+ml/artifacts/*.onnx
+
+# Explicitly track essential trained model artifacts (< 100 MB)
+!ml/artifacts/.gitkeep
+!ml/artifacts/emotion_cnn.keras
+!ml/artifacts/class_names.json
+!ml/artifacts/evaluation_metrics.json
+!ml/artifacts/training_history.json
+!ml/artifacts/confusion_matrix.png
+
+# Explicitly track all reproducible ML evaluation assets
+!ml/evaluation/*.py
+!ml/evaluation/*.json
+!ml/evaluation/*.png
+!ml/evaluation/*.md

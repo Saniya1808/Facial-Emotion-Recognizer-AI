@@ -1,0 +1,149 @@
+{
+    "test_accuracy": 0.452354,
+    "test_accuracy_percentage": "45.24%",
+    "total_samples": 7178,
+    "classes": [
+        "angry",
+        "disgust",
+        "fear",
+        "happy",
+        "neutral",
+        "sad",
+        "surprise"
+    ],
+    "per_class": {
+        "angry": {
+            "precision": 0.40612,
+            "recall": 0.304802,
+            "f1_score": 0.348241,
+            "support": 958,
+            "true_positives": 292,
+            "predicted_total": 719
+        },
+        "disgust": {
+            "precision": 0.28866,
+            "recall": 0.252252,
+            "f1_score": 0.269231,
+            "support": 111,
+            "true_positives": 28,
+            "predicted_total": 97
+        },
+        "fear": {
+            "precision": 0.44,
+            "recall": 0.032227,
+            "f1_score": 0.060055,
+            "support": 1024,
+            "true_positives": 33,
+            "predicted_total": 75
+        },
+        "happy": {
+            "precision": 0.431879,
+            "recall": 0.904171,
+            "f1_score": 0.584548,
+            "support": 1774,
+            "true_positives": 1604,
+            "predicted_total": 3714
+        },
+        "neutral": {
+            "precision": 0.514334,
+            "recall": 0.247364,
+            "f1_score": 0.334064,
+            "support": 1233,
+            "true_positives": 305,
+            "predicted_total": 593
+        },
+        "sad": {
+            "precision": 0.379703,
+            "recall": 0.348035,
+            "f1_score": 0.36318,
+            "support": 1247,
+            "true_positives": 434,
+            "predicted_total": 1143
+        },
+        "surprise": {
+            "precision": 0.658303,
+            "recall": 0.663057,
+            "f1_score": 0.660671,
+            "support": 831,
+            "true_positives": 551,
+            "predicted_total": 837
+        }
+    },
+    "macro_avg": {
+        "precision": 0.445571,
+        "recall": 0.39313,
+        "f1_score": 0.374284,
+        "support": 7178
+    },
+    "weighted_avg": {
+        "precision": 0.458698,
+        "recall": 0.452354,
+        "f1_score": 0.400639,
+        "support": 7178
+    },
+    "confusion_matrix": [
+        [
+            292,
+            25,
+            7,
+            363,
+            54,
+            179,
+            38
+        ],
+        [
+            19,
+            28,
+            0,
+            49,
+            2,
+            10,
+            3
+        ],
+        [
+            116,
+            12,
+            33,
+            424,
+            70,
+            213,
+            156
+        ],
+        [
+            37,
+            4,
+            2,
+            1604,
+            30,
+            67,
+            30
+        ],
+        [
+            89,
+            16,
+            9,
+            602,
+            305,
+            184,
+            28
+        ],
+        [
+            128,
+            11,
+            12,
+            517,
+            114,
+            434,
+            31
+        ],
+        [
+            38,
+            1,
+            12,
+            155,
+            18,
+            56,
+            551
+        ]
+    ]
+}
